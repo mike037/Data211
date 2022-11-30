@@ -1,0 +1,25 @@
+---
+title: "Data 211 Course Project"
+author: "Michael Earl"
+date: "2022-11-29"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#H0: mu(Nights)=mu(Days), Ha: mu(Nights)!=mu(Days)
+
+ggplot(data = Sleep_All, aes(x=Shift,y=Minutes))+geom_boxplot(outlier.color = "red")+labs(title="Average Sleep, Day Shift vs. Night Shift")
+
+ggplot(data=Sleep_All, aes(x=ISO8601, y=Minutes, color=Shift))+geom_point()
+
+t.test(Minutes~Shift,data = Sleep_All,alternative="two.sided",paired=FALSE)
+
+mean(Sleep_All$Minutes)
+#We reject H0, there is evidence that there is less sleep on night shifts than on day shifts.
+
+```
+
